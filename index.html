@@ -1,1 +1,506 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeris OS - Lekki system oparty na Arch Linux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .desktop-animation {
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .desktop-3d {
+            transform: rotateX(10deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .language-selector {
+            transition: all 0.3s ease;
+        }
+        
+        .language-selector:hover {
+            transform: scale(1.05);
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="fixed top-4 right-4 z-50 flex space-x-2">
+        <button onclick="changeLanguage('pl')" class="language-selector bg-blue-600 text-white px-3 py-1 rounded-full text-sm">PL</button>
+        <button onclick="changeLanguage('en')" class="language-selector bg-gray-200 px-3 py-1 rounded-full text-sm">EN</button>
+        <button onclick="changeLanguage('de')" class="language-selector bg-gray-200 px-3 py-1 rounded-full text-sm">DE</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 py-20 bg-gradient-to-br from-indigo-50 to-blue-100">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-900" data-i18n="hero_title">Aeris OS</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto" data-i18n="hero_subtitle">Lekki, wydajny system operacyjny oparty na Arch Linux</p>
+            
+            <div class="relative max-w-4xl mx-auto mt-12 desktop-animation">
+                <div class="rounded-xl overflow-hidden border-2 border-white shadow-2xl desktop-3d">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b32e847e-620d-4d49-8707-85787e84eefd.png" alt="Aeris OS modern desktop with dark theme featuring elegant interface and productivity apps" id="desktop-view" class="w-full" />
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-blue-600 text-white px-4 py-2 rounded-lg floating">
+                    <span data-i18n="hero_label">Nowa wersja 2.0</span>
+                </div>
+            </div>
+            
+            <div class="mt-20 flex flex-wrap justify-center gap-4">
+                <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 transform hover:scale-105" data-i18n="download_btn">Pobierz teraz</a>
+                <a href="#features" class="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-8 rounded-full transition duration-300 transform hover:scale-105" data-i18n="features_btn">Poznaj możliwości</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 scroll-animate" data-i18n="features_title">Dlaczego Aeris OS?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-xl bg-indigo-50 scroll-animate">
+                    <div class="text-blue-600 text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="feature1_title">Niesamowita wydajność</h3>
+                    <p data-i18n="feature1_desc">Optymalizowany kernel Arch Linux zapewnia płynne działanie nawet na starszym sprzęcie.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-xl bg-indigo-50 scroll-animate">
+                    <div class="text-blue-600 text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="feature2_title">Piękny interfejs</h3>
+                    <p data-i18n="feature2_desc">Nowoczesny design z możliwością pełnej personalizacji zgodnie z Twoimi preferencjami.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-xl bg-indigo-50 scroll-animate">
+                    <div class="text-blue-600 text-4xl mb-4">🔧</div>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="feature3_title">Gotowy do pracy</h3>
+                    <p data-i18n="feature3_desc">Wbudowane narzędzia dla programistów i twórców treści dostępne od pierwszego uruchomienia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desktop Showcase Section with Scroll Animations -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 scroll-animate" data-i18n="desktop_title">Poznaj system</h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-8 justify-center">
+                <div class="md:w-1/2 scroll-animate">
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="desktop1_title">Nowoczesny pulpit</h3>
+                    <p class="mb-6" data-i18n="desktop1_desc">Elegancki ciemny interfejs użytkownika z płynnymi animacjami i efektywnym zarządzaniem oknami.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop1_feature1">Domyślny ciemny tryb</span></li>
+                        <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop1_feature2">Panele i dok z transparentnością</span></li>
+                        <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop1_feature3">Płynne animacje i efekty</span></li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 scroll-animate">
+                    <div class="rounded-xl overflow-hidden border-2 border-white shadow-xl">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3fac14c3-4940-4212-ab8a-903077a4ef44.png" alt="Aeris OS dark themed desktop with minimalist design" class="w-full" id="desktop-img" />
+                    </div>
+                </div>
+            </div>
+                <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="md:w-1/2 scroll-animate">
+                        <h3 class="text-2xl font-bold mb-4" data-i18n="desktop2_title">Potężne centrum sterowania</h3>
+                        <p class="mb-6" data-i18n="desktop2_desc">Wszystkie ustawienia systemu dostępne w jednym miejscu, przejrzyście uporządkowane.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop2_feature1">Konfiguracja sprzętu i sieci</span></li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop2_feature2">Zarządzanie użytkownikami</span></li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop2_feature3">Aktualizacje systemu w jednym kliknięciu</span></li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 scroll-animate">
+                        <div class="rounded-xl overflow-hidden border-2 border-white shadow-xl">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ff7d6ba0-c905-4482-a49e-b9d1d865bfa8.png" alt="Aeris OS control center with system settings and configuration options" class="w-full" id="scene2-img" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Scene 3 -->
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/2 scroll-animate">
+                        <h3 class="text-2xl font-bold mb-4" data-i18n="desktop3_title">Środowisko dla programistów</h3>
+                        <p class="mb-6" data-i18n="desktop3_desc">Zintegrowane narzędzia i terminal dla tych, którzy cenią sobie efektywną pracę.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop3_feature1">Wbudowane wsparcie dla Dockera i podsystemu Linux</span></li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop3_feature2">Powerful terminal with tabs and customization</span></li>
+                            <li class="flex items-center"><span class="text-blue-600 mr-2">✓</span> <span data-i18n="desktop3_feature3">Preinstalowane środowiska programistyczne</span></li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 scroll-animate">
+                        <div class="rounded-xl overflow-hidden border-2 border-white shadow-xl">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0533aee8-12dc-4546-8ee4-4aa92ae18f48.png" alt="Aeris OS development environment showing code editor and terminal windows" class="w-full" id="scene3-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 px-4 bg-gradient-to-br from-blue-600 to-indigo-800 text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 scroll-animate" data-i18n="download_title">Gotowy na zmianę?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto scroll-animate" data-i18n="download_subtitle">Pobierz Aeris OS i doświadcz Linuxa w nowej odsłonie</p>
+            
+            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm scroll-animate w-full max-w-md mx-auto mb-12">
+                <h3 class="text-xl font-bold mb-4" data-i18n="download_option1">Aeris OS</h3>
+                <p class="mb-6" data-i18n="download_option1_desc">Ostateczna wersja z ciemnym motywem</p>
+                <button class="w-full bg-white text-blue-600 font-medium py-3 px-8 rounded-full transition duration-300 hover:bg-gray-100 text-lg" data-i18n="download_btn">Pobierz (2.8 GB)</button>
+            </div>
+            
+            <p class="text-sm opacity-80 scroll-animate" data-i18n="download_note">Wymagania systemowe: 64-bitowy procesor, 4GB RAM, 20GB wolnego miejsca na dysku</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4" data-i18n="footer_about">O Aeris OS</h3>
+                <p class="mb-4" data-i18n="footer_about_desc">Lekki system oparty na Arch Linux, stworzony z myślą o wydajności i eleganckim designie.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white">GitHub</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4" data-i18n="footer_links">Przydatne linki</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_link1">Dokumentacja</a></li>
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_link2">Forum wsparcia</a></li>
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_link3">Polityka prywatności</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4" data-i18n="footer_community">Społeczność</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_community1">Discord</a></li>
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_community2">Grupa Telegram</a></li>
+                    <li><a href="#" class="hover:text-white" data-i18n="footer_community3">Reddit</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4" data-i18n="footer_contact">Kontakt</h3>
+                <ul class="space-y-2">
+                    <li data-i18n="footer_email">Email: support@aerisos.org</li>
+                    <li data-i18n="footer_report">Zgłoś błąd</li>
+                    <li data-i18n="footer_contribute">Współtwórz projekt</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-gray-800 text-center">
+            <p data-i18n="footer_copyright">© 2023 Aeris OS Project. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            pl: {
+                hero_title: "Aeris OS",
+                hero_subtitle: "Lekki, wydajny system operacyjny oparty na Arch Linux",
+                hero_label: "Nowa wersja 2.0",
+                download_btn: "Pobierz teraz",
+                features_btn: "Poznaj możliwości",
+                
+                features_title: "Dlaczego Aeris OS?",
+                feature1_title: "Niesamowita wydajność",
+                feature1_desc: "Optymalizowany kernel Arch Linux zapewnia płynne działanie nawet na starszym sprzęcie.",
+                feature2_title: "Piękny interfejs",
+                feature2_desc: "Nowoczesny design z możliwością pełnej personalizacji zgodnie z Twoimi preferencjami.",
+                feature3_title: "Gotowy do pracy",
+                feature3_desc: "Wbudowane narzędzia dla programistów i twórców treści dostępne od pierwszego uruchomienia.",
+                
+                desktop_title: "Poznaj system",
+                desktop1_title: "Nowoczesny pulpit",
+                desktop1_desc: "Elegancki ciemny interfejs użytkownika z płynnymi animacjami i efektywnym zarządzaniem oknami.",
+                desktop1_feature1: "Domyślny ciemny tryb",
+                desktop1_feature2: "Panele i dok dostosowane do potrzeb",
+                desktop1_feature3: "Efekty wizualne bez obciążania systemu",
+                desktop2_title: "Potężne centrum sterowania",
+                desktop2_desc: "Wszystkie ustawienia systemu dostępne w jednym miejscu, przejrzyście uporządkowane.",
+                desktop2_feature1: "Konfiguracja sprzętu i sieci",
+                desktop2_feature2: "Zarządzanie użytkownikami",
+                desktop2_feature3: "Aktualizacje systemu w jednym kliknięciu",
+                desktop3_title: "Środowisko dla programistów",
+                desktop3_desc: "Zintegrowane narzędzia i terminal dla tych, którzy cenią sobie efektywną pracę.",
+                desktop3_feature1: "Wbudowane wsparcie dla Dockera i podsystemu Linux",
+                desktop3_feature2: "Zaawansowany terminal z zakładkami",
+                desktop3_feature3: "Preinstalowane środowiska programistyczne",
+                
+                download_title: "Gotowy na zmianę?",
+                download_subtitle: "Pobierz Aeris OS i doświadcz Linuxa w nowej odsłonie",
+                download_option1: "Standard Edition",
+                download_option1_desc: "Dla większości użytkowników",
+                download_option2: "Developer Edition",
+                download_option2_desc: "Z dodatkowymi narzędziami",
+                download_note: "Wymagania systemowe: 64-bitowy procesor, 4GB RAM, 20GB wolnego miejsca na dysku",
+                
+                footer_about: "O Aeris OS",
+                footer_about_desc: "Lekki system oparty na Arch Linux, stworzony z myślą o wydajności i eleganckim designie.",
+                footer_links: "Przydatne linki",
+                footer_link1: "Dokumentacja",
+                footer_link2: "Forum wsparcia",
+                footer_link3: "Polityka prywatności",
+                footer_community: "Społeczność",
+                footer_community1: "Discord",
+                footer_community2: "Grupa Telegram",
+                footer_community3: "Reddit",
+                footer_contact: "Kontakt",
+                footer_email: "Email: support@aerisos.org",
+                footer_report: "Zgłoś błąd",
+                footer_contribute: "Współtwórz projekt",
+                footer_copyright: "© 2023 Aeris OS Project. Wszystkie prawa zastrzeżone."
+            },
+            en: {
+                hero_title: "Aeris OS",
+                hero_subtitle: "Lightweight, high-performance OS based on Arch Linux",
+                hero_label: "New version 2.0",
+                download_btn: "Download now",
+                features_btn: "Explore features",
+                
+                features_title: "Why Aeris OS?",
+                feature1_title: "Incredible performance",
+                feature1_desc: "Optimized Arch Linux kernel ensures smooth operation even on older hardware.",
+                feature2_title: "Beautiful interface",
+                feature2_desc: "Modern design with full customization capabilities to suit your preferences.",
+                feature3_title: "Ready to work",
+                feature3_desc: "Built-in tools for developers and content creators available from first boot.",
+                
+                desktop_title: "Discover the system",
+                desktop1_title: "Modern desktop",
+                desktop1_desc: "Elegant user interface with smooth animations and efficient window management.",
+                desktop1_feature1: "Dark and light modes",
+                desktop1_feature2: "Customizable panels and docks",
+                desktop1_feature3: "Visual effects without system overload",
+                desktop2_title: "Powerful control center",
+                desktop2_desc: "All system settings in one place, clearly organized.",
+                desktop2_feature1: "Hardware and network configuration",
+                desktop2_feature2: "User management",
+                desktop2_feature3: "One-click system updates",
+                desktop3_title: "Developer environment",
+                desktop3_desc: "Integrated tools and terminal for those who value efficient work.",
+                desktop3_feature1: "Built-in support for Docker and Linux subsystem",
+                desktop3_feature2: "Powerful terminal with tabs",
+                desktop3_feature3: "Pre-installed development environments",
+                
+                download_title: "Ready for change?",
+                download_subtitle: "Download Aeris OS and experience Linux in a new way",
+                download_option1: "Standard Edition",
+                download_option1_desc: "For most users",
+                download_option2: "Developer Edition",
+                download_option2_desc: "With additional tools",
+                download_note: "System requirements: 64-bit processor, 4GB RAM, 20GB free disk space",
+                
+                footer_about: "About Aeris OS",
+                footer_about_desc: "Lightweight system based on Arch Linux, designed for performance and elegant design.",
+                footer_links: "Useful links",
+                footer_link1: "Documentation",
+                footer_link2: "Support forum",
+                footer_link3: "Privacy policy",
+                footer_community: "Community",
+                footer_community1: "Discord",
+                footer_community2: "Telegram group",
+                footer_community3: "Reddit",
+                footer_contact: "Contact",
+                footer_email: "Email: support@aerisos.org",
+                footer_report: "Report an issue",
+                footer_contribute: "Contribute",
+                footer_copyright: "© 2023 Aeris OS Project. All rights reserved."
+            },
+            de: {
+                hero_title: "Aeris OS",
+                hero_subtitle: "Leichtgewichtiges, leistungsstarkes OS basierend auf Arch Linux",
+                hero_label: "Neue Version 2.0",
+                download_btn: "Jetzt herunterladen",
+                features_btn: "Funktionen erkunden",
+                
+                features_title: "Warum Aeris OS?",
+                feature1_title: "Unglaubliche Leistung",
+                feature1_desc: "Optimierter Arch Linux Kernel für reibungslosen Betrieb auch auf älterer Hardware.",
+                feature2_title: "Schöne Oberfläche",
+                feature2_desc: "Modernes Design mit umfangreichen Anpassungsmöglichkeiten.",
+                feature3_title: "Arbeitsbereit",
+                feature3_desc: "Integrierte Tools für Entwickler und Content Creator ab dem ersten Start.",
+                
+                desktop_title: "Entdecken Sie das System",
+                desktop1_title: "Moderner Desktop",
+                desktop1_desc: "Elegante Benutzeroberfläche mit flüssigen Animationen und effizientem Fenstermanagement.",
+                desktop1_feature1: "Dunkel- und Hellmodus",
+                desktop1_feature2: "Anpassbare Panels und Docks",
+                desktop1_feature3: "Visuelle Effekte ohne Systembelastung",
+                desktop2_title: "Leistungsstarkes Kontrollzentrum",
+                desktop2_desc: "Alle Systemeinstellungen an einem Ort, übersichtlich organisiert.",
+                desktop2_feature1: "Hardware- und Netzwerkkonfiguration",
+                desktop2_feature2: "Benutzerverwaltung",
+                desktop2_feature3: "Systemaktualisierungen mit einem Klick",
+                desktop3_title: "Entwicklerumgebung",
+                desktop3_desc: "Integrierte Tools und Terminal für effizientes Arbeiten.",
+                desktop3_feature1: "Integrierte Unterstützung für Docker und Linux-Subsystem",
+                desktop3_feature2: "Leistungsstarkes Terminal mit Tabs",
+                desktop3_feature3: "Vorinstallierte Entwicklungsumgebungen",
+                
+                download_title: "Bereit für Veränderung?",
+                download_subtitle: "Laden Sie Aeris OS herunter und erleben Sie Linux neu",
+                download_option1: "Standard Edition",
+                download_option1_desc: "Für die meisten Benutzer",
+                download_option2: "Developer Edition",
+                download_option2_desc: "Mit zusätzlichen Tools",
+                download_note: "Systemanforderungen: 64-Bit-Prozessor, 4GB RAM, 20GB freier Speicherplatz",
+                
+                footer_about: "Über Aeris OS",
+                footer_about_desc: "Leichtgewichtiges System basierend auf Arch Linux, entwickelt für Leistung und elegantes Design.",
+                footer_links: "Nützliche Links",
+                footer_link1: "Dokumentation",
+                footer_link2: "Support-Forum",
+                footer_link3: "Datenschutzrichtlinie",
+                footer_community: "Community",
+                footer_community1: "Discord",
+                footer_community2: "Telegram Gruppe",
+                footer_community3: "Reddit",
+                footer_contact: "Kontakt",
+                footer_email: "Email: support@aerisos.org",
+                footer_report: "Problem melden",
+                footer_contribute: "Mitwirken",
+                footer_copyright: "© 2023 Aeris OS Projekt. Alle Rechte vorbehalten."
+            }
+        };
+
+        // Language switcher
+        function changeLanguage(lang) {
+            // Update UI elements
+            document.documentElement.lang = lang;
+            
+            // Update button states
+            document.querySelectorAll('.language-selector').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200');
+            });
+            
+            // Set active button
+            document.querySelector(`button[onclick="changeLanguage('${lang}')"]`).classList.add('bg-blue-600', 'text-white');
+            document.querySelector(`button[onclick="changeLanguage('${lang}')"]`).classList.remove('bg-gray-200');
+            
+            // Apply translations
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = translations[lang][key] || translations['pl'][key];
+            });
+        }
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate-in');
+                }
+            });
+        }
+
+        // Desktop view change on scroll
+        function changeDesktopOnScroll() {
+            const scrollPosition = window.scrollY;
+            const desktop = document.querySelector('.desktop-animation');
+            const desktopImg = document.getElementById('desktop-view');
+            const scene1Img = document.getElementById('scene1-img');
+            const scene2Img = document.getElementById('scene2-img');
+            const scene3Img = document.getElementById('scene3-img');
+            
+            // Rotate desktop in hero section
+            if (scrollPosition < 100) {
+                desktop.classList.add('desktop-3d');
+                desktopImg.src = "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d00c6346-0d15-4f5e-9c45-213c29e9e5ee.png";
+            } else {
+                desktop.classList.remove('desktop-3d');
+            }
+            
+            // Change desktop view in feature sections
+            if (scrollPosition > 500 && scrollPosition < 1200) {
+                scene1Img.src = "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e09f3975-72e8-4007-ba60-152dcc810fc3.png";
+                scene2Img.src = "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c121c867-f898-462a-a945-79247e5800cf.png";
+                scene3Img.src = "https://placehold.co/800x500";
+            } else if (scrollPosition > 1200 && scrollPosition < 1800) {
+                scene1Img.src = "https://placehold.co/800x500";
+                scene2Img.src = "https://placehold.co/800x500";
+                scene3Img.src = "https://placehold.co/800x500";
+            } else if (scrollPosition > 1800) {
+                scene1Img.src = "https://placehold.co/800x500";
+                scene2Img.src = "https://placehold.co/800x500";
+                scene3Img.src = "https://placehold.co/800x500";
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage('pl');
+            
+            // Initial scroll animation
+            animateOnScroll();
+            
+            // Set up scroll events
+            window.addEventListener('scroll', function() {
+                animateOnScroll();
+                changeDesktopOnScroll();
+            });
+        });
+    </script>
+</body>
+</html>
 
